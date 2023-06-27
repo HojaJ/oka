@@ -48,8 +48,8 @@ Route::group(['middleware' => 'auth:web'], function(){
 
 
 
-    Route::resource('/paragraph', ParagraphController::class);
-    Route::put('/paragraph/{paragraph}', [ParagraphController::class,'page_edit'])->name('paragraph.paragraph_edit');
+    Route::resource('paragraph', ParagraphController::class);
+    Route::put('/paragraph_e/{paragraph}', [ParagraphController::class,'page_edit'])->name('paragraph.paragraph_edit');
     Route::post('/mark-as-read', [HomeController::class, 'markNotification'])->name('admin.markNotification');
 });
 

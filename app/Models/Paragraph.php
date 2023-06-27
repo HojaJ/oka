@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Paragraph extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'explanation', 'translation','audio','unit_id','page_id'];
+    protected $fillable = ['name', 'explanation', 'translation','audio','unit_id','page_id','order'];
 
     public function unit(){
         return $this->belongsTo(Unit::class);

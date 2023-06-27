@@ -19,9 +19,11 @@ class ParagraphController extends Controller
     public function index()
     {
         $id = (int)request()->unit_id;
-        $unit = Unit::where('id',$id)->first();
+        if(!$id){
+            return redirect()->route('unit.index');
+        }
 
-//        $units = Unit::latest()->get();
+        $unit = Unit::where('id',$id)->first();
         $datas = $unit->parags;
         return view('admin.paragraph.index', compact('datas'));
     }
@@ -84,8 +86,7 @@ class ParagraphController extends Controller
     public function edit(Paragraph $paragraph)
     {
         $units = Unit::latest()->get();
-        $data = $paragraph;
-        return view('admin.paragraph.edit', compact('data','units'));
+        return view('admin.paragraph.edit', compact('paragraph','units'));
     }
 
     /**
@@ -109,6 +110,7 @@ class ParagraphController extends Controller
                 'explanation' => $request->explanation,
                 'translation' => $request->translation,
                 'audio' => $audio,
+                'order'=>$request->order
                 //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
             ]);
 

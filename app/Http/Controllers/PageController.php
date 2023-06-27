@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Traits\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class PageController extends Controller
@@ -153,7 +154,9 @@ class PageController extends Controller
     public function bulk_remove(Request $request)
     {
         try {
+            DB::statement("SET foreign_key_checks=0");
             Page::truncate();
+            DB::statement("SET foreign_key_checks=1");
             return redirect()->route('page.index')->with('success', 'Barysy Pozuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

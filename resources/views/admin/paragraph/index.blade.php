@@ -28,8 +28,8 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->translation }}</td>
-                                <td>{{ $data->explanation }}</td>
+                                <td>{!!   $data->translation !!}</td>
+                                <td>{!! $data->explanation !!}</td>
                                 <td>
                                     <figure>
                                         <figcaption>{{ $data->audio }}</figcaption>

@@ -32,6 +32,7 @@
                                     foreach ($data->parags as $parag){
                                         $obj = (object) [
                                             'id' => $parag->id,
+                                            'order' => $parag->order,
                                             'edit_url' => route('paragraph.edit', $parag->id),
                                             'delete_url' => route('paragraph.destroy', $parag->id),
                                             'name' => $parag->name,
@@ -202,9 +203,10 @@
 
                 if (typeof array != "undefined" && array != null && array.length != null && array.length > 0) {
                     var num = 1;
-                    var html = '<table class="table"><thead><tr><th>Id</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
+                    var html = '<table class="table"><thead><tr><th>Id</th><th>Order</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
                     array.forEach(function (element) {
                         html += '<tr><td>'+ element['id'] +
+                            '</td><td>' + element['order'] +
                             '</td><td>' + element['name'] +
                             '</td><td>' + element['explanation'] +
                             '</td><td>' + element['translation'] +

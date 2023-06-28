@@ -21,10 +21,10 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'password' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'password' => 'required'
+        // ]);
 
         if(auth()->guard('web')->attempt([
             'name'      => $request->name,

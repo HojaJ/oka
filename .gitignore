@@ -4,8 +4,11 @@
 /public/storage
 /public/images
 /public/pages
+/public/vendor
 /public/audios
 /storage/*.key
+/bootstrap
+/storage
 /vendor
 .env
 .env.backup

@@ -53,15 +53,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleU">Unit</label>
-                            <select name="unit_id" id="exampleU" class="form-control">
-                                <option value="none">None</option>
-                                @foreach($units as $unit)
-                                    <option @if($paragraph->unit_id === $unit->id) selected @endif value="{{$unit->id}}">{{ $unit->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="exampleU">Unit</label>--}}
+{{--                            <select name="unit_id" id="exampleU" class="form-control">--}}
+{{--                                <option value="none">None</option>--}}
+{{--                                @foreach($units as $unit)--}}
+{{--                                    <option @if($paragraph->unit_id === $unit->id) selected @endif value="{{$unit->id}}">{{ $unit->name }}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
 
                     <div class="m-3">
                         <button type="submit" class="btn btn-primary d-inline-block">Edit</button>

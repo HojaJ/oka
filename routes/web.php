@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:web'], function(){
 
     Route::resource('/section', SectionController::class);
     Route::post('/section_bulk', [SectionController::class,'bulk_add'])->name('section.bulkadd');
-    Route::put('/section/{section}', [SectionController::class,'page_edit'])->name('section.page_edit');
+    Route::put('/section_e/{section}', [SectionController::class,'page_edit'])->name('section.page_edit');
     Route::delete('/section_remove', [SectionController::class,'bulk_remove'])->name('section.remove');
 
 

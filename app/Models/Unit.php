@@ -16,7 +16,7 @@ class Unit extends Model
 
     public function parags()
     {
-        return $this->hasMany(Paragraph::class);
+        return $this->hasMany(Paragraph::class)->orderBy('order');
     }
 
     public function pages()

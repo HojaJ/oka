@@ -15,6 +15,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Order</th>
                                 <th>Name</th>
                                 <th>Translation</th>
                                 <th>Explanation</th>
@@ -27,6 +28,7 @@
                         <tbody>
                             @foreach($datas as $data)
                             <tr>
+                                <td>{{ $data->order }}</td>
                                 <td>{{ $data->name }}</td>
                                 <td>{!!   $data->translation !!}</td>
                                 <td>{!! $data->explanation !!}</td>

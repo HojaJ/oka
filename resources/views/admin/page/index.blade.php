@@ -28,6 +28,7 @@
                         <thead>
                             <tr>
                                 <th>Order</th>
+                                <th>id</th>
                                 <th>Image</th>
                                 <th>Upload</th>
                                 <th>Action</th>
@@ -37,6 +38,7 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->order }}</td>
+                                <td>{{ $data->id }}</td>
                                 <td>
                                     @if(is_null($data->image_url))
                                         None
@@ -49,7 +51,7 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="d-flex">
-                                            <input type="file" name="image" class="form-control-file" id="exampleFile" accept=".png, .jpg, .jpeg">
+                                            <input type="file" name="image" class="form-control-file" id="exampleFile" accept=".png, .jpg, .jpeg" required>
                                             <button  style="white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change Image</button>
                                         </div>
                                     </form>

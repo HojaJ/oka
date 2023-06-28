@@ -42,7 +42,8 @@ class SectionController extends Controller
     {
         try {
             Section::create([
-                'name' => $request->name,
+                'min' => $request->min,
+                'max' => $request->max,
                 'order' => $request->order
             ]);
 
@@ -86,7 +87,8 @@ class SectionController extends Controller
     {
         try {
             $section->update([
-                'name' => $request->name,
+                'min' => $request->min,
+                'max' => $request->max,
                 'order' => $request->order
             ]);
             return redirect()->route('section.index')->with('success', 'Edited');
@@ -117,10 +119,14 @@ class SectionController extends Controller
         try {
             $min = (int)$request->min_number;
             $max = (int)$request->max_number;
-            $pages = Page::whereBetween('id', [$min, $max])->get();
-            $pages->each(function ($item) use($section){
-                $item->update(['section_id'=> (int)$section->id]);
-            });
+            $section->update([
+               'min' => $min,
+               'max' => $max
+            ]);
+//            $pages = Page::whereBetween('id', [$min, $max])->get();
+//            $pages->each(function ($item) use($section){
+//                $item->update(['section_id'=> (int)$section->id]);
+//            });
             return redirect()->route('section.index')->with('success', 'Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

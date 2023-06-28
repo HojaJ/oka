@@ -17,7 +17,7 @@
                             <tr>
                                 <th>Order</th>
                                 <th>Paragraph Count</th>
-                                <th>Pages</th>
+{{--                                <th>Pages</th>--}}
                                 <th>Name</th>
                                 <th>Short Name</th>
                                 <th>Image</th>
@@ -31,7 +31,7 @@
                                     $array = [];
                                     foreach ($data->parags as $parag){
                                         $obj = (object) [
-                                            'id' => $parag->id,
+
                                             'order' => $parag->order,
                                             'edit_url' => route('paragraph.edit', $parag->id),
                                             'delete_url' => route('paragraph.destroy', $parag->id),
@@ -53,19 +53,19 @@
                                     </a>
                                     <a href="{{ route('paragraph.index', ['unit_id' => $data->id ]) }}" target="_blank" class="btn btn-sm btn-light ">{{ $data->paragraph_count }}</a>
                                 </td>
-                                <td>
+{{--                                <td>--}}
 
-                                    <form action="{{ route('unit.unit_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="d-flex">
-                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="min_number" class="form-control-file mr-2" value="{{ $data->min_id() }}" />
-                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="max_number" class="form-control-file mr-2" value="{{ $data->max_id() }}" />
-                                            <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>
-                                        </div>
-                                    </form>
+{{--                                    <form action="{{ route('unit.unit_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('PUT')--}}
+{{--                                        <div class="d-flex">--}}
+{{--                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="min_number" class="form-control-file mr-2" value="{{ $data->min_id() }}" />--}}
+{{--                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="max_number" class="form-control-file mr-2" value="{{ $data->max_id() }}" />--}}
+{{--                                            <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>--}}
+{{--                                        </div>--}}
+{{--                                    </form>--}}
 
-                                </td>
+{{--                                </td>--}}
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->short_name }}</td>
 
@@ -203,9 +203,9 @@
 
                 if (typeof array != "undefined" && array != null && array.length != null && array.length > 0) {
                     var num = 1;
-                    var html = '<table class="table"><thead><tr><th>Id</th><th>Order</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
+                    var html = '<table class="table"><thead><tr><th>Order</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
                     array.forEach(function (element) {
-                        html += '<tr><td>'+ element['id'] +
+                        html +=
                             '</td><td>' + element['order'] +
                             '</td><td>' + element['name'] +
                             '</td><td>' + element['explanation'] +

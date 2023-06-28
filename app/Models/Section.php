@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','order'];
+    protected $fillable = ['name','order','min','max'];
 
     public function pages()
     {

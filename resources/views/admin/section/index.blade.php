@@ -41,9 +41,9 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="d-flex">
-                                            <input type="number" min="{{ $parentless->min('id') }}" max="{{ $parentless->max('id') }}" name="min_number" class="form-control-file mr-2" value="{{ $data->min_id() }}" />
-                                            <input type="number" min="{{ $parentless->min('id') }}" max="{{ $parentless->max('id') }}" name="max_number" class="form-control-file mr-2" value="{{ $data->max_id() }}" >
-                                            <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>
+                                            <input type="number" size="10" name="min_number" class="form-control-file mr-2" value="{{ $data->min }}" required />
+                                            <input type="number"  name="max_number" class="form-control-file mr-2" value="{{ $data->max }}" required  />
+                                            <button  style=" white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>
                                         </div>
                                     </form>
 

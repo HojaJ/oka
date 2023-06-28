@@ -11,7 +11,15 @@
 
                     <div class="form-group">
                         <label for="exampleorder">Order</label>
-                        <input type="number" name="order" class="form-control" id="exampleorder" value="{{ $data->order }}">
+                        <input min="1" type="number" name="order" class="form-control" id="exampleorder" value="{{ $data->order }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="min">Pages id min</label>
+                        <input min="1" type="number" name="min" class="form-control" id="min" value="{{ $data->min }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="max">Pages id max</label>
+                        <input min="1" type="number" name="max" class="form-control" id="max" value="{{ $data->max }}">
                     </div>
 
                     <div class="m-3">

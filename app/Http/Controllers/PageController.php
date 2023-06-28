@@ -17,7 +17,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $datas = Page::latest()->get();
+        $datas = Page::orderBy('order')->get();
         return view('admin.page.index', compact('datas'));
     }
 
@@ -39,6 +39,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        $image_url= null;
         try {
             if ($request->image){
                 $image_url = Support::storePageImage($request->image);
@@ -87,6 +88,7 @@ class PageController extends Controller
     public function update(Request $request, Page $page)
     {
         try {
+            $image_url= null;
             if ($request->image){
                 File::delete($page->image_url);
                 $image_url = Support::storePageImage($request->image);
@@ -96,9 +98,10 @@ class PageController extends Controller
                 'image_url' => $image_url,
                 'order' => $request->order
             ]);
+
             return redirect()->route('page.index')->with('success', 'Page Edited');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => 'Error']);
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 

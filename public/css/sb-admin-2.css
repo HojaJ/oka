@@ -11249,3 +11249,6 @@ table.table-bordered.dataTable th, table.table-bordered.dataTable td {
     border-bottom-width: 1px !important;
     border-left-width: 1px !important;
 }
+input[type='number']{
+  width: 80px;
+}

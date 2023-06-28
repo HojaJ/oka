@@ -85,8 +85,8 @@ class ParagraphController extends Controller
      */
     public function edit(Paragraph $paragraph)
     {
-        $units = Unit::latest()->get();
-        return view('admin.paragraph.edit', compact('paragraph','units'));
+//        $units = Unit::latest()->get();
+        return view('admin.paragraph.edit', compact('paragraph'));
     }
 
     /**

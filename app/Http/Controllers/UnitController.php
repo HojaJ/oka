@@ -12,14 +12,14 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $page_date = [
-            'page_min' =>Page::min('id'),
-            'page_max' =>Page::max('id')
-        ];
+//        $page_date = [
+//            'page_min' =>Page::min('id'),
+//            'page_max' =>Page::max('id')
+//        ];
 
         $images = Image::latest()->get();
         $datas = Unit::latest()->get();
-        return view('admin.unit.index', compact('datas','images','page_date'));
+        return view('admin.unit.index', compact('datas','images'));
     }
 
     /**

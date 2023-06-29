@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Paragraph;
 use App\Models\Unit;
 use App\Traits\Support;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -109,12 +110,11 @@ class ParagraphController extends Controller
                 'name' => $request->name,
                 'explanation' => $request->explanation,
                 'translation' => $request->translation,
-                'audio' => $audio,
-                'order'=>$request->order
+                'audio' => $audio
                 //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
             ]);
 
-            return redirect()->route('paragraph.index')->with('success', 'Üýtgedildi');
+            return redirect()->route('paragraph.index', $paragraph->unit_id)->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

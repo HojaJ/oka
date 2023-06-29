@@ -23,10 +23,10 @@
                             <input type="text" name="name" class="form-control" id="examplename" value="{{ $paragraph->name }}">
                         </div>
 
-                        <div class="form-group">
-                            <label for="examplorder">Order</label>
-                            <input type="number" name="order" class="form-control" id="examplorder" value="{{ $paragraph->order }}">
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="examplorder">Order</label>--}}
+{{--                            <input type="number" name="order" class="form-control" id="examplorder" value="{{ $paragraph->order }}">--}}
+{{--                        </div>--}}
 
                         <div class="form-group">
                             <label for="exampleE">Explanation</label>

@@ -51,7 +51,7 @@ class UnitController extends Controller
             ]);
 
             for ($i = 1; $i <= $paragraph_count; $i++){
-                Paragraph::create(['unit_id' => $unit->id]);
+                Paragraph::create(['unit_id' => $unit->id, 'order' => $i]);
             }
 
             return redirect()->route('unit.index')->with('success', 'Goşuldy');

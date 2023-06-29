@@ -35,9 +35,9 @@
                                             'order' => $parag->order,
                                             'edit_url' => route('paragraph.edit', $parag->id),
                                             'delete_url' => route('paragraph.destroy', $parag->id),
-                                            'name' => $parag->name,
-                                            'explanation' => $parag->explanation,
-                                            'translation' => $parag->translation,
+                                            'name' =>  substr($parag->name, 0, 50).'...',
+                                            'explanation' => substr($parag->explanation, 0, 50).'...',
+                                            'translation' => substr($parag->translation, 0, 50).'...',
                                             'audio' => $parag->audio,
                                         ];
                                         array_push($array, $obj);

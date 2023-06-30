@@ -114,7 +114,7 @@ class ParagraphController extends Controller
                 //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
             ]);
 
-            return redirect()->route('unit.index')->with('success', 'Üýtgedildi');
+            return redirect()->back()->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

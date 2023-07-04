@@ -31,7 +31,6 @@
                                     $array = [];
                                     foreach ($data->parags as $parag){
                                         $obj = (object) [
-
                                             'order' => $parag->order,
                                             'edit_url' => route('paragraph.edit', $parag->id),
                                             'delete_url' => route('paragraph.destroy', $parag->id),

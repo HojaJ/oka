@@ -4,7 +4,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4" >
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addItem">
+            <a href="{{ url()->previous() }}" class="btn btn-primary" data-toggle="modal" data-target="#addItem">
                 Add New
             </a>
         </div>

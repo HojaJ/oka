@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 <div class="container-fluid">
-    <a href="{{ url()->previous() }}" class="btn btn-primary"><i class="fas fa-arrow-left">&nbsp;&nbsp;</i>Back</a>
+    <a href="{{ route('unit.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left">&nbsp;&nbsp;</i>Back</a>
     <div class="col-8 mx-auto">
         <div class="card shadow mb-4">
             <div class="card-body">

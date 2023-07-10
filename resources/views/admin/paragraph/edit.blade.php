@@ -74,13 +74,13 @@
 
 </div>
 @endsection
-    @push('scripts')
-        <script src="{{ asset('vendor\js\summernote-lite.min.js') }}"></script>
-        <script>
-            $(function () {
-                $('.textarea_summer').summernote({
-                    height: 120
-                });
-            });
-        </script>
-@endpush
+{{--    @push('scripts')--}}
+{{--        <script src="{{ asset('vendor\js\summernote-lite.min.js') }}"></script>--}}
+{{--        <script>--}}
+{{--            $(function () {--}}
+{{--                $('.textarea_summer').summernote({--}}
+{{--                    height: 120--}}
+{{--                });--}}
+{{--            });--}}
+{{--        </script>--}}
+{{--@endpush--}}

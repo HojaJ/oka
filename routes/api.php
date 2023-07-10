@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('suggest', [HomeController::class, 'store']);
 Route::get('policy', [HomeController::class, 'policy']);
-Route::get('unit', [HomeController::class, 'unit']);
+Route::get('units', [HomeController::class, 'unit']);
 Route::get('unit/{unit}', [HomeController::class, 'show']);
 
 

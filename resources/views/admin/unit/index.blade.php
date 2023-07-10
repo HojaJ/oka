@@ -47,9 +47,9 @@
                             <tr data-child-value="{{json_encode($array) }}">
                                 <td>{{ $data->order }}</td>
                                 <td>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-light parags">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
+{{--                                    <a href="javascript:void(0)" class="btn btn-sm btn-light parags">--}}
+{{--                                        <i class="fas fa-eye"></i>--}}
+{{--                                    </a>--}}
                                     <a href="{{ route('paragraph.index', ['unit_id' => $data->id ]) }}" target="_blank" class="btn btn-sm btn-light ">{{ $data->paragraph_count }}</a>
                                 </td>
 {{--                                <td>--}}
@@ -192,7 +192,7 @@
                     tr.removeClass('shown');
                 } else {
                     // Open this row
-                    row.child(format(tr.data('child-value'))).show();
+                    // row.child(format(tr.data('child-value'))).show();
                     tr.addClass('shown');
                 }
             });
@@ -200,7 +200,7 @@
             function format(array) {
 
 
-                if (typeof array != "undefined" && array != null && array.length != null && array.length > 0) {
+                    if (typeof array != "undefined" && array != null && array.length != null && array.length > 0) {
                     var num = 1;
                     var html = '<table class="table"><thead><tr><th>Order</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
                     array.forEach(function (element) {

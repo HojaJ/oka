@@ -10,13 +10,13 @@ class UnitResource extends JsonResource
 
     public function toArray($request)
     {
-        $page_starts = $this->pages->min('id');
-        $page =  Page::where('id', $page_starts)->first();
+//        $page_starts = $this->pages->min('id');
+//        $page =  Page::where('id', $page_starts)->first();
         return [
             'id' => $this->id,
             'order' => $this->order,
-            'page_starts' => $page_starts,
-            'section' => $page->section?->order,
+//            'page_starts' => $page_starts,
+//            'section' => $page->section?->order,
             'name' => $this->name,
             'short_name' => $this->short_name,
             'paragraph_count' => $this->paragraph_count,

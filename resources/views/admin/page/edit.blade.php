@@ -12,6 +12,15 @@
                         <label for="examplorder">Order</label>
                         <input type="number" name="order" class="form-control" id="examplorder" value="{{ $data->order }}">
                     </div>
+                    <div class="form-group">
+                        <label for="examplesection_id">Section id</label>
+                        <select class="form-control" name="section_id" id="examplesection_id" style="width: 100px">
+                            @foreach($sections as $section)
+                                <option value="{{$section->id}}" @if($section->id === $data->id) selected @endif>{{$section->id}}</option>
+                            @endforeach
+                        </select>
+{{--                        <input type="number" name="order" class="form-control" id="examplesection_id" value="{{ $data->order }}">--}}
+                    </div>
                     <div class="row form-group">
                         <div class="col">
                             <label for="exampleFile">Edit Image</label>

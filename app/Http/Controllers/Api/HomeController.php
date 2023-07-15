@@ -19,6 +19,7 @@ class HomeController  extends ApiBaseController
      *      path="/suggest",
      *      operationId="suggest",
      *      tags={"Suggest"},
+     *      description="/suggest",
      *      summary="Suggest a thing",
      *      @OA\RequestBody(
      *         required=true,
@@ -52,6 +53,7 @@ class HomeController  extends ApiBaseController
      * @OA\Get(
      *    path="/policy",
      *    operationId="policy",
+     *     description="/policy",
      *    tags={"Policy"},
      *    summary="Get policy text",
      *     @OA\Response(
@@ -66,39 +68,5 @@ class HomeController  extends ApiBaseController
     {
         $policy = Policy::where('id', 1)->get();
         return $this->successResponse(['policy' => $policy]);
-    }
-
-    /**
-     * @OA\Get(
-     *    path="/units",
-     *    operationId="units",
-     *    tags={"Units"},
-     *    summary="Get units",
-     *     @OA\Response(
-     *          response=200, description="Success",
-     *          @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example="true"),
-     *          )
-     *       )
-     *  )
-     */
-    public function unit()
-    {
-        try {
-            $units = Unit::orderBy('order')->withCount('parags')->get();
-            return $this->successResponse([
-                'units' => UnitResource::collection($units)
-            ]);
-        } catch (\Exception $e){
-            return $this->errorResponse($e->getMessage());
-        }
-    }
-
-    public function show(Request $request, Unit $unit)
-    {
-
-        return $this->successResponse([
-           'paragraph' => $unit->parags
-        ]);
     }
 }

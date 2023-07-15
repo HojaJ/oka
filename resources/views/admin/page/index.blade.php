@@ -28,7 +28,7 @@
                         <thead>
                             <tr>
                                 <th>Order</th>
-                                <th>id</th>
+                                <th>Section id</th>
                                 <th>Image</th>
                                 <th>Upload</th>
                                 <th>Action</th>
@@ -38,7 +38,7 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->order }}</td>
-                                <td>{{ $data->id }}</td>
+                                <td>{{ $data->section_id }}</td>
                                 <td>
                                     @if(is_null($data->image_url))
                                         None

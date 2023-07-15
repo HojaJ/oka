@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Section;
 use App\Traits\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class PageController extends Controller
      */
     public function index()
     {
+
         $datas = Page::orderBy('order')->get();
         return view('admin.page.index', compact('datas'));
     }
@@ -74,8 +76,9 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
+        $sections = Section::select('id')->get();
         $data = $page;
-        return view('admin.page.edit', compact('data'));
+        return view('admin.page.edit', compact('data','sections'));
     }
 
     /**
@@ -96,6 +99,7 @@ class PageController extends Controller
 
             $page->update([
                 'image_url' => $image_url,
+                'section_id' => $request->section_id,
                 'order' => $request->order
             ]);
 

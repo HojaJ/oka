@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Paragraph;
+use App\Models\Page;
+use App\Models\Section;
 use Illuminate\Console\Command;
 
 class StripTagsCommand extends Command
@@ -28,12 +29,16 @@ class StripTagsCommand extends Command
      */
     public function handle()
     {
-        $paragraphs = Paragraph::get();
-        foreach ($paragraphs as $paragraph){
-            $paragraph->update([
-               'explanation' => strip_tags($paragraph->explanation),
-               'translation' => strip_tags($paragraph->etranslationxplanation),
-            ]);
+        $pages = Page::get();
+        $sections = Section::select('id','min','max')->get()->toArray();
+        foreach ($pages as $page){
+            foreach ($sections as $section){
+                if(($section['min'] <= $page->id) && ($page->id <= $section['max'])){
+                    $page->update([
+                       'section_id' => $section['id']
+                    ]);
+                }
+            }
         }
         return true;
     }

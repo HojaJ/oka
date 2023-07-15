@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\ParagraphController;
+use App\Http\Controllers\Api\SectionController;
+use App\Http\Controllers\Api\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('suggest', [HomeController::class, 'store']);
 Route::get('policy', [HomeController::class, 'policy']);
-Route::get('units', [HomeController::class, 'unit']);
-Route::get('unit/{unit}', [HomeController::class, 'show']);
+Route::get('units', [UnitController::class, 'units']);
+//Route::get('unit/{unit}', [UnitController::class, 'show']);
+Route::get('sections', [SectionController::class,'index']);
+Route::get('paragraphs', [ParagraphController::class,'index']);
+Route::get('pages', [PageController::class,'index']);
 
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

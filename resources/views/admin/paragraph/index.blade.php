@@ -21,7 +21,7 @@
                                 <th>Translation</th>
                                 <th>Audio</th>
                                 <th>Unit</th>
-                                <th>Page</th>
+{{--                                <th>Page</th>--}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,28 +48,28 @@
                                         {{ $data->unit->name }}
                                     @endif
                                 </td>
-                                <td>
-                                    @if(is_null($data->unit_id))
-                                        None
-                                    @else
-                                        @if($data->unit->pages)
-                                            <form action="{{ route('paragraph.paragraph_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="d-flex">
-                                                    <select name="page_id" class="form-control ml-2">
-                                                        <option>None</option>
-                                                        @foreach($data->unit->pages as $page)
-                                                            <option @if($page->id === $data->page_id) selected @endif value="{{$page->id}}">{{ $page->order }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    &nbsp;&nbsp;&nbsp;
-                                                    <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>
-                                                </div>
-                                            </form>
-                                        @endif
-                                    @endif
-                                </td>
+{{--                                <td>--}}
+{{--                                    @if(is_null($data->unit_id))--}}
+{{--                                        None--}}
+{{--                                    @else--}}
+{{--                                        @if($data->unit->pages)--}}
+{{--                                            <form action="{{ route('paragraph.paragraph_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">--}}
+{{--                                                @csrf--}}
+{{--                                                @method('PUT')--}}
+{{--                                                <div class="d-flex">--}}
+{{--                                                    <select name="page_id" class="form-control ml-2">--}}
+{{--                                                        <option>None</option>--}}
+{{--                                                        @foreach($data->unit->pages as $page)--}}
+{{--                                                            <option @if($page->id === $data->page_id) selected @endif value="{{$page->id}}">{{ $page->order }}</option>--}}
+{{--                                                        @endforeach--}}
+{{--                                                    </select>--}}
+{{--                                                    &nbsp;&nbsp;&nbsp;--}}
+{{--                                                    <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>--}}
+{{--                                                </div>--}}
+{{--                                            </form>--}}
+{{--                                        @endif--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
                                 <td>
                                     <a href="{{route('paragraph.edit', $data->id)}}" class="btn btn-info btn-sm text-white">
                                         <i class="fas fa-edit"></i> Edit

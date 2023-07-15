@@ -29,9 +29,9 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->order }}</td>
-                                <td style="text-align: right; direction: rtl;">{{ $data->name ?  substr($data->name, 0, 50).'...' : 'Empty' }}</td>
-                                <td style="text-align: right; direction: rtl;">{!!   substr($data->translation, 0, 50).'...' !!}</td>
-                                <td style="text-align: right; direction: rtl;">{!! substr($data->explanation, 0, 50).'...' !!}</td>
+                                <td style="text-align: right; direction: rtl;">{{ $data->name ?  $data->name : 'Empty' }}</td>
+                                <td style="">{!!   substr($data->translation, 0, 50).'...' !!}</td>
+                                <td style="">{!! substr($data->explanation, 0, 50).'...' !!}</td>
                                 <td>
                                     <figure>
                                         <figcaption>{{ $data->audio }}</figcaption>

@@ -45,7 +45,7 @@
                                     @if(is_null($data->image_url))
                                         None
                                     @else
-                                        <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" height="50px"></a>
+                                        <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" height="100px"></a>
                                     @endif
                                 </td>
                                 <td>
@@ -152,8 +152,7 @@
             $('#dataTable').DataTable({
                 stateSave: true,
                 paging:false,
-                "searching": false
-                "iDisplayLength": 25,
+                "searching": false,
                 drawCallback: function(){
                     lazyLoadInstance.update();
                 }

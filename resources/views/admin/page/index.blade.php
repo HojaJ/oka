@@ -49,11 +49,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 250px">
+                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 18%">
                                         @csrf
                                         @method('PUT')
                                         <div class="d-flex">
-                                            <select name="start_unit" class="form-control" style="width: 150px" required>
+                                            <select name="start_unit" class="form-control" style="width: 120px" required>
                                                 @foreach($units as $unit)
                                                     <option value="{{$unit->id}}" @if($unit->id === $data->start_unit) selected @endif >{{$unit->order }} {{$unit->short_name}}</option>
                                                 @endforeach
@@ -64,11 +64,11 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 250px">
+                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 18%">
                                         @csrf
                                         @method('PUT')
                                         <div class="d-flex">
-                                            <select name="end_unit" class="form-control" style="width: 150px" required>
+                                            <select name="end_unit" class="form-control" style="width: 120px" required>
                                                 @foreach($units as $unit)
                                                     <option value="{{$unit->id}}" @if($unit->id === $data->end_unit) selected @endif >{{$unit->order }} {{$unit->short_name}}</option>
                                                 @endforeach

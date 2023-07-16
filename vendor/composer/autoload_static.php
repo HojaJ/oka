@@ -554,11 +554,16 @@ class ComposerStaticInit1da15e772ff4e82bbc4d899c14cec8ce
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\StripTagsCommand' => __DIR__ . '/../..' . '/app/Console/Commands/StripTagsCommand.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Api\\ApiBaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ApiBaseController.php',
         'App\\Http\\Controllers\\Api\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/HomeController.php',
+        'App\\Http\\Controllers\\Api\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PageController.php',
+        'App\\Http\\Controllers\\Api\\ParagraphController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ParagraphController.php',
+        'App\\Http\\Controllers\\Api\\SectionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/SectionController.php',
+        'App\\Http\\Controllers\\Api\\UnitController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UnitController.php',
         'App\\Http\\Controllers\\Auth\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminAuthController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -588,6 +593,9 @@ class ComposerStaticInit1da15e772ff4e82bbc4d899c14cec8ce
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
+        'App\\Http\\Resources\\Api\\ParagraphResource' => __DIR__ . '/../..' . '/app/Http/Resources/Api/ParagraphResource.php',
+        'App\\Http\\Resources\\PageResource' => __DIR__ . '/../..' . '/app/Http/Resources/PageResource.php',
+        'App\\Http\\Resources\\SectionResource' => __DIR__ . '/../..' . '/app/Http/Resources/SectionResource.php',
         'App\\Http\\Resources\\UnitResource' => __DIR__ . '/../..' . '/app/Http/Resources/UnitResource.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',

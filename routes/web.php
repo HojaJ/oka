@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:web'], function(){
     Route::resource('/image', ImageController::class);
 
     Route::resource('/page', PageController::class);
+    Route::put('/page_/{page}',[PageController::class,'update_'])->name('page.update_');
     Route::post('/page_bulk', [PageController::class,'bulk_add'])->name('page.bulkadd');
     Route::put('/page_edit/{page}', [PageController::class,'page_edit'])->name('page.page_edit');
     Route::delete('/page_remove', [PageController::class,'bulk_remove'])->name('page.remove');

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     use HasFactory;
-    protected $fillable  = ['order','section_id', 'image_url'];
+    protected $fillable  = ['order','section_id', 'image_url','start_unit','start_paragraph','end_unit','end_paragraph'];
 
     public function units()
     {

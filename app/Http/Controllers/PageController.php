@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Section;
+use App\Models\Unit;
 use App\Traits\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,9 +19,9 @@ class PageController extends Controller
      */
     public function index()
     {
-
-        $datas = Page::orderBy('order')->get();
-        return view('admin.page.index', compact('datas'));
+        $units = Unit::select('id','order','short_name')->get();
+        $datas = Page::orderBy('order')->paginate(30);
+        return view('admin.page.index', compact('datas','units'));
     }
 
     /**
@@ -103,6 +104,28 @@ class PageController extends Controller
                 'order' => $request->order
             ]);
 
+            return redirect()->route('page.index')->with('success', 'Page Edited');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function update_(Request $request, Page $page)
+    {
+        try {
+            if($request->start_unit && $request->start_paragraph){
+                $page->update([
+                    'start_unit' => (int) $request->start_unit,
+                    'start_paragraph' => (int) $request->start_paragraph
+                ]);
+            }
+
+            if($request->end_unit && $request->end_paragraph){
+                $page->update([
+                    'end_unit' => (int) $request->end_unit,
+                    'end_paragraph' => (int) $request->end_paragraph
+                ]);
+            }
             return redirect()->route('page.index')->with('success', 'Page Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

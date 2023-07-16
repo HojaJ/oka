@@ -30,6 +30,8 @@
                                 <th>Order</th>
                                 <th>Section id</th>
                                 <th>Image</th>
+                                <th>Start unit/paragraph</th>
+                                <th>End unit/paragraph</th>
                                 <th>Upload</th>
                                 <th>Action</th>
                             </tr>
@@ -43,8 +45,38 @@
                                     @if(is_null($data->image_url))
                                         None
                                     @else
-                                    <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" height="50px"></a>
+                                        <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" height="50px"></a>
                                     @endif
+                                </td>
+                                <td>
+                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 250px">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="d-flex">
+                                            <select name="start_unit" class="form-control" style="width: 150px" required>
+                                                @foreach($units as $unit)
+                                                    <option value="{{$unit->id}}" @if($unit->id === $data->start_unit) selected @endif >{{$unit->order }} {{$unit->short_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="number" name="start_paragraph" class="form-control ml-2" min="0" style="width: 80px" required value="{{ $data->start_paragraph }}">
+                                            <button  style="white-space: nowrap;" type="submit" class="btn btn-primary btn-sm ml-2 d-inline-block">Set</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ route('page.update_', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 250px">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="d-flex">
+                                            <select name="end_unit" class="form-control" style="width: 150px" required>
+                                                @foreach($units as $unit)
+                                                    <option value="{{$unit->id}}" @if($unit->id === $data->end_unit) selected @endif >{{$unit->order }} {{$unit->short_name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="number" name="end_paragraph" class="form-control ml-2" min="0" style="width: 80px" required value="{{ $data->end_paragraph }}">
+                                            <button  style="white-space: nowrap;" type="submit" class="btn btn-primary btn-sm ml-2 d-inline-block">Set</button>
+                                        </div>
+                                    </form>
                                 </td>
                                 <td>
                                     <form action="{{ route('page.page_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px" enctype="multipart/form-data">
@@ -74,6 +106,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $datas->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,7 +151,9 @@
             var lazyLoadInstance = new LazyLoad({});
             $('#dataTable').DataTable({
                 stateSave: true,
-                "iDisplayLength": 100,
+                paging:false,
+                "searching": false
+                "iDisplayLength": 25,
                 drawCallback: function(){
                     lazyLoadInstance.update();
                 }

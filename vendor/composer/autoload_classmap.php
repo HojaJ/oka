@@ -6,11 +6,16 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\StripTagsCommand' => $baseDir . '/app/Console/Commands/StripTagsCommand.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Api\\ApiBaseController' => $baseDir . '/app/Http/Controllers/Api/ApiBaseController.php',
     'App\\Http\\Controllers\\Api\\HomeController' => $baseDir . '/app/Http/Controllers/Api/HomeController.php',
+    'App\\Http\\Controllers\\Api\\PageController' => $baseDir . '/app/Http/Controllers/Api/PageController.php',
+    'App\\Http\\Controllers\\Api\\ParagraphController' => $baseDir . '/app/Http/Controllers/Api/ParagraphController.php',
+    'App\\Http\\Controllers\\Api\\SectionController' => $baseDir . '/app/Http/Controllers/Api/SectionController.php',
+    'App\\Http\\Controllers\\Api\\UnitController' => $baseDir . '/app/Http/Controllers/Api/UnitController.php',
     'App\\Http\\Controllers\\Auth\\AdminAuthController' => $baseDir . '/app/Http/Controllers/Auth/AdminAuthController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -40,6 +45,9 @@ return array(
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
+    'App\\Http\\Resources\\Api\\ParagraphResource' => $baseDir . '/app/Http/Resources/Api/ParagraphResource.php',
+    'App\\Http\\Resources\\PageResource' => $baseDir . '/app/Http/Resources/PageResource.php',
+    'App\\Http\\Resources\\SectionResource' => $baseDir . '/app/Http/Resources/SectionResource.php',
     'App\\Http\\Resources\\UnitResource' => $baseDir . '/app/Http/Resources/UnitResource.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Page' => $baseDir . '/app/Models/Page.php',

@@ -17,6 +17,11 @@
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
     @stack('styles')
+    <style>
+        body {
+            zoom: 90%;
+        }
+    </style>
 </head>
 
 <body id="page-top">

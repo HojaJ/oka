@@ -126,7 +126,7 @@ class PageController extends Controller
                     'end_paragraph' => (int) $request->end_paragraph
                 ]);
             }
-            return redirect()->route('page.index')->with('success', 'Page Edited');
+            return redirect()->back()->with('success', 'Page Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

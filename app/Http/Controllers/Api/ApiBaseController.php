@@ -9,12 +9,12 @@ use App\Traits\ApiResponse;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Oka we Owren Api Documentation",
+ *      title="Terjime Kitap API Endpoints",
  * )
  *
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
- *      description="Api Server"
+ *      description="API Endpoints"
  * )
  *
  * @OA\PathItem(path="/api")

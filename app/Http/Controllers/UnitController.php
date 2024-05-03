@@ -5,21 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Page;
 use App\Models\Paragraph;
+use App\Models\Section;
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class UnitController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-//        $page_date = [
-//            'page_min' =>Page::min('id'),
-//            'page_max' =>Page::max('id')
-//        ];
-
+        $q = $request->search;
         $images = Image::latest()->get();
-        $datas = Unit::latest()->get();
-        return view('admin.unit.index', compact('datas','images'));
+        $datas = Unit::oldest()
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('name', 'like', '%' . $q . '%')
+                    ->orWhere('short_name', 'like', '%' . $q . '%');
+            })
+            ->paginate(20)->appends(request()->input());
+        return view('admin.unit.index', compact('datas', 'images'));
     }
 
     /**
@@ -35,7 +39,7 @@ class UnitController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,10 +51,10 @@ class UnitController extends Controller
                 'order' => $request->order,
                 'short_name' => $request->short_name,
                 'paragraph_count' => $paragraph_count,
-                'image_id' => ($request->image_id === 'none' ? null : $request->image_id )
+                'image_id' => ($request->image_id === 'none' ? null : $request->image_id)
             ]);
 
-            for ($i = 1; $i <= $paragraph_count; $i++){
+            for ($i = 1; $i <= $paragraph_count; $i++) {
                 Paragraph::create(['unit_id' => $unit->id, 'order' => $i]);
             }
 
@@ -63,7 +67,7 @@ class UnitController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param \App\Models\Unit $unit
      * @return \Illuminate\Http\Response
      */
     public function show(Unit $unit)
@@ -74,21 +78,22 @@ class UnitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param \App\Models\Unit $unit
      * @return \Illuminate\Http\Response
      */
     public function edit(Unit $unit)
     {
         $images = Image::latest()->get();
+        $sections = Section::oldest()->get();
         $data = $unit;
-        return view('admin.unit.edit', compact('data','images'));
+        return view('admin.unit.edit', compact('data', 'images','sections'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Unit  $unit
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Unit $unit
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Unit $unit)
@@ -97,10 +102,11 @@ class UnitController extends Controller
             $paragraph_count = $request->paragraph_count;
             $unit->update([
                 'name' => $request->name,
+                'section_id'=> $request->section_id,
                 'order' => $request->order,
                 'short_name' => $request->short_name,
                 'paragraph_count' => $paragraph_count,
-                'image_id' => ($request->image_id === 'none' ? null : $request->image_id )
+                'image_id' => ($request->image_id === 'none' ? null : $request->image_id)
             ]);
             return redirect()->route('unit.index')->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
@@ -111,16 +117,15 @@ class UnitController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param \App\Models\Unit $unit
      * @return \Illuminate\Http\Response
      */
     public function destroy(Unit $unit)
     {
-        try{
+        try {
             $unit->delete();
             return redirect()->route('unit.index')->with('success', 'Pozuldy');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }

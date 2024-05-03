@@ -10,6 +10,20 @@
                 <button class="btn btn-primary" type="submit">Add</button>
             </form>
 
+            <div>
+                <form id="search_form" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="{{ route('page.index') }}">
+                    <div class="input-group search">
+                        <input type="text" class="form-control bg-white small" value="{{ request()->get('search', '')  }}" placeholder="Section id" name="search" id="search_input" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
             <form action="{{ route('page.remove') }}" method="POST" class="d-inline-block">
                 @csrf
                 @method('DELETE')
@@ -45,7 +59,7 @@
                                     @if(is_null($data->image_url))
                                         None
                                     @else
-                                        <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" height="100px"></a>
+                                        <a data-lightbox="image-1" href="{{ asset($data->image_url) }}"><img class="lazy" data-src="{{ asset($data->image_url) }}" width="50px"></a>
                                     @endif
                                 </td>
                                 <td>
@@ -82,15 +96,15 @@
                                     <form action="{{ route('page.page_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
-                                        <div class="d-flex">
+                                        <div class="d-flex justify-content-start">
                                             <input type="file" name="image" class="form-control-file" id="exampleFile" accept=".png, .jpg, .jpeg" required>
-                                            <button  style="white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change Image</button>
+                                            <button  style="white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>
                                         </div>
                                     </form>
                                 </td>
                                 <td>
                                     <a href="{{route('page.edit', $data->id)}}" class="btn btn-info btn-sm text-white">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fas fa-edit"></i>
                                     </a>
 
                                      <form action="{{ route('page.destroy', $data->id) }}" method="POST" class="d-inline-block">
@@ -98,7 +112,7 @@
                                         @method('DELETE')
 
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"  id="poz-buton-{{$data->id}}">
-                                            <i class="fas fa-trash"></i> Delete
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </form>
                                 </td>
@@ -149,14 +163,14 @@
     <script type="text/javascript">
         $(function () {
             var lazyLoadInstance = new LazyLoad({});
-            $('#dataTable').DataTable({
-                stateSave: true,
-                paging:false,
-                "searching": false,
-                drawCallback: function(){
-                    lazyLoadInstance.update();
-                }
-            });
+            // $('#dataTable').DataTable({
+            //     stateSave: true,
+            //     paging:false,
+            //     "searching": false,
+            //     drawCallback: function(){
+            //         lazyLoadInstance.update();
+            //     }
+            // });
 
             $('#dataTable tbody').on('click', "[id^='poz-buton-']", function (event) {
                 var id = $(this).attr('id');

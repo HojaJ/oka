@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th>Order</th>
+                                <th>Name</th>
                                 <th>Pages</th>
                                 <th>Action</th>
                             </tr>
@@ -35,6 +36,7 @@
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->order }}</td>
+                                <td>{{ $data->name }}</td>
                                 <td>
 
                                     <form action="{{ route('section.page_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">

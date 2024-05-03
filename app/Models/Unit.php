@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','order', 'short_name','paragraph_count','image_id'];
+    protected $fillable = ['name','order', 'short_name','paragraph_count','image_id','section_id'];
 
     public function image() {
         return $this->hasOne(Image::class,'id','image_id');

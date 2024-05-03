@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\Models\Section;
 use App\Models\Unit;
 use App\Traits\Support;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -17,10 +18,15 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $q = $request->search;
         $units = Unit::select('id','order','short_name')->get();
-        $datas = Page::orderBy('order')->paginate(30);
+        $datas = Page::orderBy('order')
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('section_id', 'like', '%' . $q . '%');
+            })
+            ->paginate(30)->appends(request()->input());
         return view('admin.page.index', compact('datas','units'));
     }
 

@@ -18,8 +18,8 @@
     <link href="{{ asset('vendor/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
     @stack('styles')
     <style>
-        body {
-            zoom: 90%;
+        .topbar {
+            height: 3rem;
         }
     </style>
 </head>
@@ -54,7 +54,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; {{ config('app.name', 'Oka Admin') }} 2022</span>
+                    <span>Copyright <?php echo date('Y')?> &copy; {{ config('app.name', 'Terjime kitap') }} </span>
                 </div>
             </div>
         </footer>
@@ -111,7 +111,6 @@
 @stack('scripts')
 <script>
     $(function() {
-
         @if(session('success'))
             toastr.success('{{ session("success") }}');
         @endif

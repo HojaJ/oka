@@ -7,6 +7,7 @@ use App\Models\Paragraph;
 use App\Models\Unit;
 use App\Traits\Support;
 use Dflydev\DotAccessData\Data;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -17,15 +18,20 @@ class ParagraphController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $id = (int)request()->unit_id;
-        if(!$id){
+        if (!$id) {
             return redirect()->route('unit.index');
         }
-
-        $unit = Unit::where('id',$id)->first();
-        $datas = $unit->parags;
+        $q = $request->search;
+        $datas = Paragraph::where('unit_id', $id)
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('name', 'like', '%' . $q . '%')
+                    ->orWhere('explanation', 'like', '%' . $q . '%')
+                    ->orWhere('translation', 'like', '%' . $q . '%');
+            })
+            ->paginate(10)->appends(request()->input());
         return view('admin.paragraph.index', compact('datas'));
     }
 
@@ -42,14 +48,14 @@ class ParagraphController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try {
             $audio = null;
-            if ($request->audio){
+            if ($request->audio) {
                 $audio = Support::storeFile($request->audio);
             }
 
@@ -70,7 +76,7 @@ class ParagraphController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Paragraph  $paragraph
+     * @param \App\Models\Paragraph $paragraph
      * @return \Illuminate\Http\Response
      */
     public function show(Paragraph $paragraph)
@@ -81,7 +87,7 @@ class ParagraphController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Paragraph  $paragraph
+     * @param \App\Models\Paragraph $paragraph
      * @return \Illuminate\Http\Response
      */
     public function edit(Paragraph $paragraph)
@@ -93,15 +99,15 @@ class ParagraphController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Paragraph  $paragraph
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Paragraph $paragraph
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Paragraph $paragraph)
     {
         try {
             $audio = $paragraph->audio;
-            if ($request->audio){
+            if ($request->audio) {
                 File::delete($paragraph->audio);
                 $audio = Support::storeFile($request->audio);
             }
@@ -113,7 +119,7 @@ class ParagraphController extends Controller
                 'audio' => $audio
                 //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
             ]);
-            return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id ])->with('success', 'Üýtgedildi');
+            return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id])->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -122,16 +128,15 @@ class ParagraphController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Paragraph  $paragraph
+     * @param \App\Models\Paragraph $paragraph
      * @return \Illuminate\Http\Response
      */
     public function destroy(Paragraph $paragraph)
     {
-        try{
+        try {
             $paragraph->delete();
             return redirect()->route('paragraph.index')->with('success', 'Pozuldy');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
@@ -140,7 +145,7 @@ class ParagraphController extends Controller
     {
         try {
             $page_id = Page::where('id', $request->page_id)->first()->id;
-            $paragraph->update(['page_id' => $page_id ]);
+            $paragraph->update(['page_id' => $page_id]);
             return redirect()->back()->with('success', 'Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

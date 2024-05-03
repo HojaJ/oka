@@ -13,6 +13,16 @@
                         <input type="number" name="order" class="form-control" id="examplorder" value="{{ $data->order }}">
                     </div>
                     <div class="form-group">
+                        <label for="examplord">Section Order</label>
+                        <select name="section_id" id="examplord" class="form-control">
+                            <option>Default</option>
+                            @foreach($sections as $section)
+                                <option value="{{ $section->order }}">{{ $section->order }}</option>
+                            @endforeach
+                        </select>
+{{--                        <input type="number" name="" class="form-control" id="examplord" value="{{ $data->section_id }}">--}}
+                    </div>
+                    <div class="form-group">
                         <label for="examplename">Name</label>
                         <input type="text" name="name" class="form-control" id="examplename" value="{{ $data->name }}">
                     </div>

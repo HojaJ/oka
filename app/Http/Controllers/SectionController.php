@@ -89,7 +89,8 @@ class SectionController extends Controller
             $section->update([
                 'min' => $request->min,
                 'max' => $request->max,
-                'order' => $request->order
+                'order' => $request->order,
+                'name' => $request->name
             ]);
             return redirect()->route('section.index')->with('success', 'Edited');
         } catch (\Exception $e) {

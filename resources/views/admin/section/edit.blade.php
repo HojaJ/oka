@@ -14,6 +14,10 @@
                         <input min="1" type="number" name="order" class="form-control" id="exampleorder" value="{{ $data->order }}">
                     </div>
                     <div class="form-group">
+                        <label for="examplename">Name</label>
+                        <input type="text" name="name" class="form-control" id="examplename" value="{{ $data->name }}">
+                    </div>
+                    <div class="form-group">
                         <label for="min">Pages id min</label>
                         <input min="1" type="number" name="min" class="form-control" id="min" value="{{ $data->min }}">
                     </div>
@@ -22,7 +26,7 @@
                         <input min="1" type="number" name="max" class="form-control" id="max" value="{{ $data->max }}">
                     </div>
 
-                    <div class="m-3">
+                    <div class="mt-3">
                         <button type="submit" class="btn btn-primary d-inline-block">Edit</button>
                     </div>
 

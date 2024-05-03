@@ -2,11 +2,28 @@
 @section('content')
     <div class="container-fluid">
         <h5>Units</h5>
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4" >
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addItem">
                 Add New
             </a>
+
+            <div>
+                <form id="search_form"
+                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                      method="get" action="{{ route('unit.index') }}">
+                    <div class="input-group search">
+                        <input type="text" class="form-control bg-white small"
+                               value="{{ request()->get('search', '')  }}" placeholder="Search" name="search"
+                               id="search_input"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -14,89 +31,64 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
-                                <th>Order</th>
-                                <th>Paragraph Count</th>
-{{--                                <th>Pages</th>--}}
-                                <th>Name</th>
-                                <th>Short Name</th>
-                                <th>Image</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr>
+                            <th>Order</th>
+                            <th>Paragraph Count</th>
+                            <th>Name</th>
+                            <th>Short Name</th>
+                            <th>Image</th>
+                            <th>Section</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($datas as $data)
-                                @if(isset($data->parags))
-                                @php
-                                    $array = [];
-                                    foreach ($data->parags as $parag){
-                                        $obj = (object) [
-                                            'order' => $parag->order,
-                                            'edit_url' => route('paragraph.edit', $parag->id),
-                                            'delete_url' => route('paragraph.destroy', $parag->id),
-                                            'name' =>  substr($parag->name, 0, 50).'...',
-                                            'explanation' => substr($parag->explanation, 0, 50).'...',
-                                            'translation' => substr($parag->translation, 0, 50).'...',
-                                            'audio' => $parag->audio,
-                                        ];
-                                        array_push($array, $obj);
-                                    }
-
-                                @endphp
-                                @endif
-                            <tr data-child-value="{{json_encode($array) }}">
+                        @foreach($datas as $data)
+                            <tr>
                                 <td>{{ $data->order }}</td>
-                                <td>
-{{--                                    <a href="javascript:void(0)" class="btn btn-sm btn-light parags">--}}
-{{--                                        <i class="fas fa-eye"></i>--}}
-{{--                                    </a>--}}
-                                    <a href="{{ route('paragraph.index', ['unit_id' => $data->id ]) }}" target="_blank" class="btn btn-sm btn-light ">{{ $data->paragraph_count }}</a>
-                                </td>
-{{--                                <td>--}}
-
-{{--                                    <form action="{{ route('unit.unit_edit', $data->id) }}" method="post" class="d-flex align-items-center" style="width: 350px">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('PUT')--}}
-{{--                                        <div class="d-flex">--}}
-{{--                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="min_number" class="form-control-file mr-2" value="{{ $data->min_id() }}" />--}}
-{{--                                            <input type="number" min="{{ $page_date['page_min']  }}" max="{{ $page_date['page_max'] }}" name="max_number" class="form-control-file mr-2" value="{{ $data->max_id() }}" />--}}
-{{--                                            <button  style="  white-space: nowrap;" type="submit" class="btn btn-primary btn-sm d-inline-block">Change</button>--}}
-{{--                                        </div>--}}
-{{--                                    </form>--}}
-
-{{--                                </td>--}}
+                                <td><a href="{{ route('paragraph.index', ['unit_id' => $data->id ]) }}" target="_blank"
+                                       class="btn btn-sm btn-light ">{{ $data->paragraph_count }}</a></td>
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->short_name }}</td>
-
                                 <td>@if(is_null($data->image_id))
                                         None
                                     @else
-                                    <a data-lightbox="image-1" href="{{ asset($data->image->url) }}"><img class="lazy" data-src="{{ asset($data->image->url) }}" height="50px"></a></td>
+                                        <a data-lightbox="image-1" href="{{ asset($data->image->url) }}"><img
+                                                    class="lazy" data-src="{{ asset($data->image->url) }}"
+                                                    height="50px"></a>
                                     @endif
+                                </td>
+                                <td>{{ $data->section_id }}</td>
                                 <td>
                                     <a href="{{route('unit.edit', $data->id)}}" class="btn btn-info btn-sm text-white">
-                                        <i class="fas fa-edit"></i> Edit
+                                        <i class="fas fa-edit"></i>
                                     </a>
 
-                                     <form action="{{ route('unit.destroy', $data->id) }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"  id="poz-buton-{{$data->id}}">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </a>
+                                    <form action="{{ route('unit.destroy', $data->id) }}" method="POST"
+                                          class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"
+                                           id="poz-buton-{{$data->id}}">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end mt-5">
+                        {!! $datas->links() !!}
+                    </div>
+
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document" style="margin-top:100px;">
             <div class="modal-content">
                 <form action="{{ route('unit.store') }}" method="post" enctype="multipart/form-data">
@@ -144,83 +136,40 @@
     </div>
 
     @push('scripts')
-    <script type="text/javascript">
-        $(function () {
-            var lazyLoadInstance = new LazyLoad({});
-            let example =  $('#dataTable').DataTable({
-                stateSave: true,
-                drawCallback: function(){
-                    lazyLoadInstance.update();
-                }
-            });
+        <script type="text/javascript">
+            $(function () {
+                var lazyLoadInstance = new LazyLoad({});
 
-            $('#dataTable tbody').on('click', "[id^='poz-buton-']", function (event) {
-                var id = $(this).attr('id');
-                id = id.replace("poz-buton-",'');
-                event.preventDefault();
+
+                $('#dataTable tbody').on('click', "[id^='poz-buton-']", function (event) {
+                    var id = $(this).attr('id');
+                    id = id.replace("poz-buton-", '');
+                    event.preventDefault();
                     Swal.fire({
-                      title: "Pozmak islýäňizmi!",
-                      icon: 'warning',
-                      showCancelButton: true,
-                      reverseButtons: true,
-                      confirmButtonColor: '#0CC27E',
-                      cancelButtonColor: '#FF586B',
-                      confirmButtonText: 'Howwa, poz!',
-                      cancelButtonText: 'Ýok!',
-                      confirmButtonClass: 'btn btn-success ml-1',
-                      cancelButtonClass: 'btn btn-danger',
-                      buttonsStyling: false
+                        title: "Pozmak isleýäňizmi!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        reverseButtons: true,
+                        confirmButtonColor: '#0CC27E',
+                        cancelButtonColor: '#FF586B',
+                        confirmButtonText: 'Howwa, poz!',
+                        cancelButtonText: 'Ýok!',
+                        confirmButtonClass: 'btn btn-success ml-1',
+                        cancelButtonClass: 'btn btn-danger',
+                        buttonsStyling: false
                     }).then((result) => {
                         if (result.isConfirmed) {
-                          $('#poz-buton-'+id).parent().submit();
-                        } else{
-                          Swal.fire(
-                            'Cancelled',
-                            'Goýbolsun edildi',
-                            'error'
-                          )
+                            $('#poz-buton-' + id).parent().submit();
+                        } else {
+                            Swal.fire(
+                                'Cancelled',
+                                'Goýbolsun edildi',
+                                'error'
+                            )
                         }
-                      })
+                    })
                 });
-
-            $('#dataTable tbody').on('click', '.parags', function (e){
-                var tr = $(this).closest('tr');
-                var row = example.row(tr);
-                if (row.child.isShown()) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                } else {
-                    // Open this row
-                    // row.child(format(tr.data('child-value'))).show();
-                    tr.addClass('shown');
-                }
             });
-
-            function format(array) {
-
-
-                    if (typeof array != "undefined" && array != null && array.length != null && array.length > 0) {
-                    var num = 1;
-                    var html = '<table class="table"><thead><tr><th>Order</th><th>Name</th><th>Translation</th><th>Explanation</th><th>Audio</th><th>Action</th></tr></thead><tbody>';
-                    array.forEach(function (element) {
-                        html +=
-                            '</td><td>' + element['order'] +
-                            '</td><td>' + element['name'] +
-                            '</td><td>' + element['explanation'] +
-                            '</td><td>' + element['translation'] +
-                            '</td><td>' + element['audio'] + '</td>' +
-                            '</td><td>' +
-                            '<a href="'+ element['edit_url'] +'"class="btn btn-info btn-sm text-white"><i class="fas fa-edit"></i> Edit</a></td></tr>';
-                    });
-                    html += '</tbody></table>';
-                    return html;
-                }else  {
-                    return '<div>No Paragraph</div>';
-                }
-            }
-
-            });
-    </script>
+        </script>
     @endpush
 @endsection

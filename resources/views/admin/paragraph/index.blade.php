@@ -100,6 +100,7 @@
             <div class="modal-content">
                 <form action="{{ route('paragraph.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="unit_id" value="{{ request()->query('unit_id') }}">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Paragraph</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -107,11 +108,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
+                        <div class="form-group">
+                            <label for="exampleorder">Order</label>
+                            <input type="number" name="order" class="form-control" id="exampleorder">
+                        </div>
                         <div class="form-group">
                             <label for="examplename">Name</label>
                             <input type="text" name="name" class="form-control" id="examplename">
                         </div>
+
 
                         <div class="form-group">
                             <label for="exampleE">Explanation</label>
@@ -125,7 +130,7 @@
                         <div class="form-group">
                             <label for="exampleFile">Audio</label>
                             <input type="file" name="audio" class="form-control-file" id="exampleFile"
-                                   accept=".mp3, .3gp, .aa, .aac,.wma,.way" required>
+                                   accept=".mp3, .3gp, .aa, .aac,.wma,.way" >
                         </div>
                     </div>
                     <div class="modal-footer">

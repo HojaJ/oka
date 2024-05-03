@@ -25,7 +25,7 @@ class ParagraphController extends Controller
             return redirect()->route('unit.index');
         }
         $q = $request->search;
-        $datas = Paragraph::where('unit_id', $id)
+        $datas = Paragraph::orderBy('order')->where('unit_id', $id)
             ->where(function (Builder $subQuery) use ($q) {
                 $subQuery->where('name', 'like', '%' . $q . '%')
                     ->orWhere('explanation', 'like', '%' . $q . '%')
@@ -64,10 +64,11 @@ class ParagraphController extends Controller
                 'explanation' => $request->explanation,
                 'translation' => $request->translation,
                 'audio' => $audio,
-                //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
+                'order' => $request->order,
+                'unit_id' => $request->unit_id
             ]);
 
-            return redirect()->route('paragraph.index')->with('success', 'Goşuldy');
+            return redirect()->route('paragraph.index', ['unit_id'=> $request->unit_id])->with('success', 'Goşuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -116,8 +117,8 @@ class ParagraphController extends Controller
                 'name' => $request->name,
                 'explanation' => $request->explanation,
                 'translation' => $request->translation,
-                'audio' => $audio
-                //'unit_id' => ($request->unit_id === 'none' ? null : $request->unit_id )
+                'audio' => $audio,
+                'order' => $request->order,
             ]);
             return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id])->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
@@ -135,7 +136,7 @@ class ParagraphController extends Controller
     {
         try {
             $paragraph->delete();
-            return redirect()->route('paragraph.index')->with('success', 'Pozuldy');
+            return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id])->with('success', 'Pozuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

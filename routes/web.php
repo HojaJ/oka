@@ -43,11 +43,8 @@ Route::group(['middleware' => 'auth:web'], function(){
     Route::put('/section_e/{section}', [SectionController::class,'page_edit'])->name('section.page_edit');
     Route::delete('/section_remove', [SectionController::class,'bulk_remove'])->name('section.remove');
 
-
     Route::resource('/unit', UnitController::class);
     Route::put('/unit_edit/{unit}', [UnitController::class,'page_edit'])->name('unit.unit_edit');
-
-
 
     Route::resource('paragraph', ParagraphController::class);
     Route::put('/paragraph_e/{paragraph}', [ParagraphController::class,'page_edit'])->name('paragraph.paragraph_edit');

@@ -19,14 +19,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="exampleorder">Order</label>
+                            <input type="number" name="order" class="form-control" id="exampleorder" value="{{ $paragraph->order }}">
+                        </div>
+                        <div class="form-group">
                             <label for="examplename">Name</label>
                             <input type="text" name="name" class="form-control" id="examplename" value="{{ $paragraph->name }}">
                         </div>
-
-{{--                        <div class="form-group">--}}
-{{--                            <label for="examplorder">Order</label>--}}
-{{--                            <input type="number" name="order" class="form-control" id="examplorder" value="{{ $paragraph->order }}">--}}
-{{--                        </div>--}}
 
                         <div class="form-group">
                             <label for="exampleE">Explanation</label>
@@ -52,18 +51,7 @@
                                 </figure>
                             </div>
                         </div>
-
-{{--                        <div class="form-group">--}}
-{{--                            <label for="exampleU">Unit</label>--}}
-{{--                            <select name="unit_id" id="exampleU" class="form-control">--}}
-{{--                                <option value="none">None</option>--}}
-{{--                                @foreach($units as $unit)--}}
-{{--                                    <option @if($paragraph->unit_id === $unit->id) selected @endif value="{{$unit->id}}">{{ $unit->name }}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-
-                    <div class="m-3">
+                    <div class="mt-3">
                         <button type="submit" class="btn btn-primary d-inline-block">Edit</button>
                     </div>
 

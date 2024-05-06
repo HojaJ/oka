@@ -68,7 +68,7 @@ class ParagraphController extends Controller
                 'unit_id' => $request->unit_id
             ]);
 
-            return redirect()->route('paragraph.index', ['unit_id'=> $request->unit_id])->with('success', 'Goşuldy');
+            return redirect()->back()->with('success', 'Goşuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -120,7 +120,7 @@ class ParagraphController extends Controller
                 'audio' => $audio,
                 'order' => $request->order,
             ]);
-            return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id])->with('success', 'Üýtgedildi');
+            return redirect()->back()->with('success', 'Üýtgedildi');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -136,7 +136,7 @@ class ParagraphController extends Controller
     {
         try {
             $paragraph->delete();
-            return redirect()->route('paragraph.index', ['unit_id' => $paragraph->unit_id])->with('success', 'Pozuldy');
+            return redirect()->back()->with('success', 'Pozuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

@@ -58,7 +58,7 @@ class PageController extends Controller
                 'order' => $request->order
             ]);
 
-            return redirect()->route('page.index')->with('success', 'Page Goşuldy');
+            return redirect()->back()->with('success', 'Page Goşuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -110,7 +110,7 @@ class PageController extends Controller
                 'order' => $request->order
             ]);
 
-            return redirect()->route('page.index')->with('success', 'Page Edited');
+            return redirect()->back()->with('success', 'Page Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
@@ -146,7 +146,7 @@ class PageController extends Controller
                 $image_url = Support::storePageImage($request->image);
             }
             $page->update(['image_url' => $image_url,]);
-            return redirect()->route('page.index')->with('success', 'Image Edited');
+            return redirect()->back()->with('success', 'Image Edited');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => 'Error']);
         }
@@ -193,7 +193,7 @@ class PageController extends Controller
             DB::statement("SET foreign_key_checks=0");
             Page::truncate();
             DB::statement("SET foreign_key_checks=1");
-            return redirect()->route('page.index')->with('success', 'Barysy Pozuldy');
+            return redirect()->back()->with('success', 'Barysy Pozuldy');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }

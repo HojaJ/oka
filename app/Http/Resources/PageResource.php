@@ -17,9 +17,8 @@ class PageResource extends JsonResource
         return [
             'id'=>$this->id,
             'order' => $this->order,
-            'start_section' => $this->section_id,
-            'start_paragraph'=>$this->start_paragraph,
             'start_unit' => $this->start_unit,
+            'start_paragraph'=>$this->start_paragraph,
             'end_unit' => $this->end_unit,
             'end_paragraph' => $this->end_paragraph,
             'image' => $this->image_url,

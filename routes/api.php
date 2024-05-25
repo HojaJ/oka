@@ -18,10 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('sections', [SectionController::class,'index']);
-Route::get('paragraphs', [ParagraphController::class,'index']);
-Route::get('pages', [PageController::class,'index']);
+Route::get('home', [SectionController::class,'index']);
 Route::get('units', [UnitController::class, 'units']);
+Route::get('units/{unit}', [UnitController::class, 'show']);
+
+Route::get('paragraphs/{paragraph}', [ParagraphController::class,'index']);
+
+Route::get('pages', [PageController::class,'index']);
+Route::get('pages/{id}', [PageController::class,'show']);
+
+
 Route::post('suggest', [HomeController::class, 'store']);
 Route::get('policy', [HomeController::class, 'policy']);
 

@@ -12,11 +12,20 @@ class ParagraphController extends ApiBaseController
 {
     /**
      * @OA\Get(
-     *    path="/paragraphs",
-     *    operationId="paragraphs",
-     *    description="/paragraphs",
+     *    path="/paragraphs/{id}",
+     *    operationId="getParagraphById",
+     *    description="/paragraphs/{id}",
      *    tags={"Paragraphs"},
-     *    summary="Get paragraphs",
+     *    summary="Get paragraph By Id",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="Paragraph id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *     @OA\Response(
      *          response=200, description="Success",
      *          @OA\JsonContent(
@@ -25,20 +34,11 @@ class ParagraphController extends ApiBaseController
      *       )
      *  )
      */
-    public function index(Request $request)
+    public function index(Request $request, Paragraph $paragraph)
     {
         try {
-            $sections = Paragraph::paginate(20);
-
             return $this->successResponse([
-                'data' => ParagraphResource::collection($sections),
-                'pagination' => [
-                    'total' => $sections->total(),
-                    'count' => $sections->count(),
-                    'per_page' => $sections->perPage(),
-                    'current_page' => $sections->currentPage(),
-                    'total_pages' => $sections->lastPage()
-                ],
+                'data' => new ParagraphResource($paragraph),
             ]);
         } catch (\Exception $e){
             return $this->errorResponse($e->getMessage());

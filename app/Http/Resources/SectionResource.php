@@ -15,9 +15,8 @@ class SectionResource extends JsonResource
             'id' => $this->id,
             'order' => $this->order,
             'name' => $this->name,
-            'start_page' => $this->min,
-            'end_page' => $this->max,
-            'units' => []
+            'start_page' => $this->start_unit,
+            'units' => $this->units()
         ];
     }
 }

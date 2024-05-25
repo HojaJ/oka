@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Section;
+use App\Models\Unit;
 use App\Traits\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class SectionController extends Controller
     public function index()
     {
         $parentless = Page::where('section_id', null)->get();
-        $datas = Section::latest()->get();
+        $datas = Section::with('startunit', 'endunit')->latest()->get();
         return view('admin.section.index', compact('datas', 'parentless'));
     }
 
@@ -72,8 +73,9 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
+        $units = Unit::oldest()->get();
         $data = $section;
-        return view('admin.section.edit', compact('data'));
+        return view('admin.section.edit', compact('data','units'));
     }
 
     /**
@@ -90,6 +92,10 @@ class SectionController extends Controller
                 'min' => $request->min,
                 'max' => $request->max,
                 'order' => $request->order,
+                'start_unit' => $request->start_unit,
+                'start_paragraph' => $request->start_paragraph,
+                'end_unit' => $request->end_unit,
+                'end_paragraph' => $request->end_paragraph,
                 'name' => $request->name
             ]);
             return redirect()->route('section.index')->with('success', 'Edited');
@@ -132,9 +138,7 @@ class SectionController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-
     }
-
 
     public function bulk_add(Request $request)
     {

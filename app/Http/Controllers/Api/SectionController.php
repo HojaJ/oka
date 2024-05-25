@@ -10,11 +10,11 @@ class SectionController extends ApiBaseController
 {
     /**
      * @OA\Get(
-     *    path="/sections",
+     *    path="/home",
      *    operationId="sections",
-     *    description="/sections",
-     *    tags={"Section"},
-     *    summary="Get sections",
+     *    description="/home",
+     *    tags={"Home"},
+     *    summary="Get Home api",
      *     @OA\Response(
      *          response=200, description="Success",
      *          @OA\JsonContent(

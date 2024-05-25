@@ -37,7 +37,6 @@
                             <th>Name</th>
                             <th>Short Name</th>
                             <th>Image</th>
-                            <th>Section</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -57,7 +56,6 @@
                                                     height="50px"></a>
                                     @endif
                                 </td>
-                                <td>{{ $data->section_id }}</td>
                                 <td>
                                     <a href="{{route('unit.edit', $data->id)}}" class="btn btn-info btn-sm text-white">
                                         <i class="fas fa-edit"></i>

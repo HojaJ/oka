@@ -16,12 +16,12 @@ class ParagraphResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'unit_index' => $this->order,
-            'unit_id' => $this->unit_id,
+            'order'=> $this->order,
             'name' => $this->name,
             'description' => $this->explanation,
             'translation' => $this->translation,
-            'audio' => asset($this->audio)
+            'audio' => asset($this->audio),
+            'on_page' => $this->on_page
         ];
     }
 }

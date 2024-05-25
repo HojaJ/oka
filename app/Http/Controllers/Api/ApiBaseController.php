@@ -18,6 +18,27 @@ use App\Traits\ApiResponse;
  * )
  *
  * @OA\PathItem(path="/api")
+ *
+ *
+ * @OA\Tag(
+ *   name="Home",
+ *   description="Get sections of book"
+ * ),
+ *
+ * @OA\Tag(
+ *   name="Units",
+ *   description="Get units of book"
+ * ),
+ *
+ * @OA\Tag(
+ *   name="Paragraphs",
+ *   description="Get Paragraphs of book By Id"
+ * ),
+ *
+ *  @OA\Tag(
+ *   name="Pages",
+ *   description="Get Page Images"
+ * ),
  */
 class ApiBaseController extends Controller
 {

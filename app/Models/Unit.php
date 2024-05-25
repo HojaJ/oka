@@ -9,9 +9,19 @@ class Unit extends Model
 {
     use HasFactory;
     protected $fillable = ['name','order', 'short_name','paragraph_count','image_id','section_id'];
+    protected $appends = ['start_page'];
 
     public function image() {
         return $this->hasOne(Image::class,'id','image_id');
+    }
+
+    public function getStartPageAttribute(){
+        return $this->page_start()?->id;
+    }
+
+    public function page_start()
+    {
+        return Page::where('start_unit', $this->id)->first();
     }
 
     public function parags()

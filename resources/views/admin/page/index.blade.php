@@ -42,19 +42,16 @@
                         <thead>
                             <tr>
                                 <th>Order</th>
-                                <th>Section id</th>
                                 <th>Image</th>
                                 <th>Start unit/paragraph</th>
                                 <th>End unit/paragraph</th>
                                 <th>Upload</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($datas as $data)
                             <tr>
                                 <td>{{ $data->order }}</td>
-                                <td>{{ $data->section_id }}</td>
                                 <td>
                                     @if(is_null($data->image_url))
                                         None
@@ -102,20 +99,6 @@
                                         </div>
                                     </form>
                                 </td>
-                                <td>
-                                    <a href="{{route('page.edit', $data->id)}}" class="btn btn-info btn-sm text-white">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-
-                                     <form action="{{ route('page.destroy', $data->id) }}" method="POST" class="d-inline-block">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm text-white"  id="poz-buton-{{$data->id}}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </form>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -129,48 +112,10 @@
 
     </div>
 
-    <div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document" style="margin-top:100px;">
-            <div class="modal-content">
-                <form action="{{ route('page.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Page</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="examplorder">Order</label>
-                            <input type="number" name="order" class="form-control" id="examplorder">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFile">Image</label>
-                            <input type="file" name="image" class="form-control-file" id="exampleFile" accept=".png, .jpg, .jpeg" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     @push('scripts')
     <script type="text/javascript">
         $(function () {
             var lazyLoadInstance = new LazyLoad({});
-            // $('#dataTable').DataTable({
-            //     stateSave: true,
-            //     paging:false,
-            //     "searching": false,
-            //     drawCallback: function(){
-            //         lazyLoadInstance.update();
-            //     }
-            // });
 
             $('#dataTable tbody').on('click', "[id^='poz-buton-']", function (event) {
                 var id = $(this).attr('id');

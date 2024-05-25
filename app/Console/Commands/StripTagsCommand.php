@@ -62,15 +62,15 @@ class StripTagsCommand extends Command
             30 => ['start_unit' => 78, 'start_paragraph' => 1, 'end_unit' => 114, 'end_paragraph' => 6],
         ];
 
-//        foreach ($sections as $key => $section){
-//            Section::find($key)->update([
-//                'name' => 'Cuz ' . $key,
-//                'start_unit' => $section['start_unit'],
-//                'start_paragraph' => $section['start_paragraph'],
-//                'end_unit' => $section['end_unit'],
-//                'end_paragraph' => $section['end_paragraph'],
-//            ]);
-//        }
+        foreach ($sections as $key => $section){
+            Section::find($key)->update([
+                'name' => 'Cuz ' . $key,
+                'start_unit' => $section['start_unit'],
+                'start_paragraph' => $section['start_paragraph'],
+                'end_unit' => $section['end_unit'],
+                'end_paragraph' => $section['end_paragraph'],
+            ]);
+        }
 //        foreach ($pages as $page){
 //            foreach ($sections as $section){
 //                if(($section['min'] <= $page->id) && ($page->id <= $section['max'])){
@@ -81,8 +81,6 @@ class StripTagsCommand extends Command
 //            }
 //        }
 
-        $section = Section::first();
-        dd($section->units());
         return true;
     }
 }

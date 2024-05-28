@@ -20,7 +20,7 @@ class ParagraphResource extends JsonResource
             'name' => $this->name,
             'description' => $this->explanation,
             'translation' => $this->translation,
-            'audio' => asset($this->audio),
+            'audio' => $this->audio,
             'on_page' => $this->on_page
         ];
     }

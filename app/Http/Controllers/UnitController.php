@@ -49,6 +49,7 @@ class UnitController extends Controller
             $unit = Unit::create([
                 'name' => $request->name,
                 'order' => $request->order,
+                'section_id'=> 1,
                 'short_name' => $request->short_name,
                 'paragraph_count' => $paragraph_count,
                 'image_id' => ($request->image_id === 'none' ? null : $request->image_id)
@@ -99,13 +100,12 @@ class UnitController extends Controller
     public function update(Request $request, Unit $unit)
     {
         try {
-            $paragraph_count = $request->paragraph_count;
             $unit->update([
                 'name' => $request->name,
-                'section_id'=> $request->section_id,
+                'section_id'=> 1,
                 'order' => $request->order,
                 'short_name' => $request->short_name,
-                'paragraph_count' => $paragraph_count,
+                'paragraph_count' => $request->paragraph_count,
                 'image_id' => ($request->image_id === 'none' ? null : $request->image_id)
             ]);
             return redirect()->route('unit.index')->with('success', 'Üýtgedildi');

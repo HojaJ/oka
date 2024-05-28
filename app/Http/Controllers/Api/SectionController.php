@@ -18,7 +18,24 @@ class SectionController extends ApiBaseController
      *     @OA\Response(
      *          response=200, description="Success",
      *          @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example="true")
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object",
+     *                  @OA\Property(property="id", type="number", example=1),
+     *                  @OA\Property(property="order", type="number", example=1),
+     *                  @OA\Property(property="name", type="string", example="Section name"),
+     *                  @OA\Property(property="start_page", type="number|null", example=2),
+     *                  @OA\Property(property="units",type="array",
+     *              @OA\Items(
+     *                  @OA\Property(property="id", type="number", example=1),
+     *                  @OA\Property(property="order", type="number", example=2),
+     *                  @OA\Property(property="name", type="string", example="Example"),
+     *                  @OA\Property(property="short_name", type="string", example="Example"),
+     *                  @OA\Property(property="paragraph_count", type="number|null", example=6),
+     *                  @OA\Property(property="start_page", type="number|null", example=2),
+     *                  )
+     *              )
+     *             )
+     *
      *          )
      *       )
      *  )

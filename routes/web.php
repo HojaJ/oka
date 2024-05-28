@@ -9,6 +9,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SuggestController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,12 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', 'dashboard');
 
 Route::group(['middleware' => 'auth:web'], function(){
-    Route::get('/dashboard', function() { return view('dashboard.dashboard'); })->name('dashboard');
+    Route::get('/dashboard', function() { return view('dashboard.dashboard', [
+        'version' => \App\Models\Version::first()
+    ]); })->name('dashboard');
+
+    Route::put('version_start', [VersionController::class, 'switch'])->name('version_start');
+    Route::put('version_clear', [VersionController::class, 'clear'])->name('version_clear');
 
     Route::resource('/admin_user', AdminController::class);
     Route::resource('/policy', PolicyController::class)->except(['store', 'delete']);

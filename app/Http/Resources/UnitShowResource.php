@@ -17,7 +17,7 @@ class UnitShowResource extends JsonResource
             'name' => $this->name,
             'short_name' => $this->short_name,
             'paragraph_count' => $this->paragraph_count,
-            'image_id' => (is_null($this->image_id) ? false :  $this->image->url),
+            'image' => (is_null($this->image_id) ? null :  $this->image->url),
             'start_page' => $this->start_page,
             'paragraphs' => ParagraphResource::collection($this->parags)
         ];

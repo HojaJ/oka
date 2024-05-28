@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\PageResource;
 use App\Models\Page;
+use App\Models\Version;
 use Illuminate\Http\Request;
 
 class PageController extends ApiBaseController
@@ -18,16 +19,26 @@ class PageController extends ApiBaseController
      *     @OA\Response(
      *          response=200, description="Success",
      *          @OA\JsonContent(
-     *             @OA\Property(property="success", type="boolean", example="true")
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data",type="array",
+     *              @OA\Items(
+     *                  @OA\Property(property="id", type="number", example=1),
+     *                  @OA\Property(property="order", type="number", example=2),
+     *                  @OA\Property(property="start_unit", type="number|null", example=5),
+     *                  @OA\Property(property="start_paragraph", type="number|null", example=3),
+     *                  @OA\Property(property="end_unit", type="number|null", example=4),
+     *                  @OA\Property(property="end_paragraph", type="number|null", example=6),
+     *                  @OA\Property(property="image", type="string|null", example="pages/8ZsZewgoBc42Zkd.JPG"),
+     *                  )
+     *             )
      *          )
-     *       )
+     *      )
      *  )
      */
     public function index(Request $request)
     {
         try {
             $pages = Page::orderBy('order')->get();
-
             return $this->successResponse([
                 'data' => PageResource::collection($pages),
             ]);
@@ -56,14 +67,55 @@ class PageController extends ApiBaseController
      *          response=200, description="Success",
      *          @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object",
+     *                  @OA\Property(property="id", type="number", example=1),
+     *                  @OA\Property(property="order", type="number", example=2),
+     *                  @OA\Property(property="start_unit", type="number|null", example=5),
+     *                  @OA\Property(property="start_paragraph", type="number|null", example=3),
+     *                  @OA\Property(property="end_unit", type="number|null", example=4),
+     *                  @OA\Property(property="end_paragraph", type="number|null", example=6),
+     *                  @OA\Property(property="image", type="string|null", example="pages/8ZsZewgoBc42Zkd.JPG"),
+     *             )
      *          )
      *       )
      *  )
      */
-    public function show(Request $request, Page $page)
+    public function show(Request $request, $id)
     {
-        return $this->successResponse([
-            'paragraph' => new PageResource($page)
-        ]);
+        if (Page::where('id', $id)->exists()) {
+            return $this->successResponse([
+                'data' => new PageResource(Page::find($id))
+            ]);
+        } else{
+            return $this->errorResponse('Not Found');
+        }
+    }
+
+    /**
+     * @OA\Get(
+     *    path="/version",
+     *    operationId="Version",
+     *    description="/version",
+     *    tags={"Version"},
+     *    summary="Version",
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example="true"),
+     *          )
+     *      )
+     *  )
+     */
+    public function version()
+    {
+        try {
+            $version = Version::first();
+
+            return $this->successResponse([
+                'data' => $version->data ?? [],
+            ]);
+        } catch (\Exception $e){
+            return $this->errorResponse($e->getMessage());
+        }
     }
 }

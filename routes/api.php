@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('home', [SectionController::class,'index']);
 Route::get('units', [UnitController::class, 'units']);
-Route::get('units/{unit}', [UnitController::class, 'show']);
+Route::get('units/{id}', [UnitController::class, 'show']);
 
-Route::get('paragraphs/{paragraph}', [ParagraphController::class,'index']);
+Route::get('paragraphs/{id}', [ParagraphController::class,'index']);
 
 Route::get('pages', [PageController::class,'index']);
 Route::get('pages/{id}', [PageController::class,'show']);
@@ -30,6 +30,8 @@ Route::get('pages/{id}', [PageController::class,'show']);
 
 Route::post('suggest', [HomeController::class, 'store']);
 Route::get('policy', [HomeController::class, 'policy']);
+
+Route::get('version', [PageController::class,'version']);
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();

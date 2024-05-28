@@ -40,8 +40,8 @@
                             <tr>
                                 <td>{{ $data->order }}</td>
                                 <td>{{ $data->name }}</td>
-                                <td>{{ $data->startunit->order }} Unit: {{ $data->start_paragraph }}</td>
-                                <td>{{ $data->endunit->order }} Unit: {{ $data->end_paragraph }}</td>
+                                <td>{{ $data->startunit?->order }} Unit: {{ $data->start_paragraph }}</td>
+                                <td>{{ $data->endunit?->order }} Unit: {{ $data->end_paragraph }}</td>
                                 <td>
                                     <form action="{{ route('section.page_edit', $data->id) }}" method="post"
                                           class="d-flex align-items-center" style="width: 350px">

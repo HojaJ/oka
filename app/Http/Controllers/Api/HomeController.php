@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\UnitResource;
+use App\Http\Resources\PolicyResource;
+use App\Http\Resources\SuggestResource;
 use App\Models\Policy;
 use App\Models\Suggest;
-use App\Models\Unit;
 use Notification;
 use App\Models\User;
 use App\Notifications\SuggestNotification;
 use Illuminate\Http\Request;
 
-class HomeController  extends ApiBaseController
+class HomeController extends ApiBaseController
 {
     /**
      * @OA\Post(
@@ -21,17 +20,31 @@ class HomeController  extends ApiBaseController
      *      tags={"Suggest"},
      *      description="/suggest",
      *      summary="Suggest a thing",
-     *      @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *            required={"message"},
-     *            @OA\Property(property="message", type="string", format="string", example="Test Suggest Title"),
-     *         ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="message",
+     *                          type="string"
+     *                      ),
+     *                 ),
+     *                 example={
+     *                     "message":"Test Suggest Title",
+     *                }
+     *             )
+     *         )
      *      ),
      *     @OA\Response(
      *          response=200, description="Success",
      *          @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object",
+     *                  @OA\Property(property="id", type="number", example=1),
+     *                  @OA\Property(property="text", type="string", example="Some message"),
+     *             )
      *          )
      *       )
      *  )
@@ -39,12 +52,13 @@ class HomeController  extends ApiBaseController
     public function store(Request $request)
     {
         try {
-            $offerData = Suggest::create($request->all());
+            $offerData = Suggest::create(['message' => $request->message]);
             $users = User::get();
             Notification::send($users, new SuggestNotification($offerData));
-
-            return $this->successResponse([]);
-        } catch (\Exception $e){
+            return $this->successResponse([
+                'data' => new SuggestResource($offerData)
+            ]);
+        } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
         }
     }
@@ -60,13 +74,19 @@ class HomeController  extends ApiBaseController
      *          response=200, description="Success",
      *          @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example="true"),
+     *             @OA\Property(property="data", type="object",
+     *              @OA\Property(property="id", type="number", example=1),
+     *              @OA\Property(property="text", type="string", example="bu dine test..."),
+     *             )
      *          )
      *       )
      *  )
      */
     public function policy()
     {
-        $policy = Policy::where('id', 1)->get();
-        return $this->successResponse(['policy' => $policy]);
+        $policy = Policy::first();
+        return $this->successResponse([
+            'data' => new PolicyResource($policy)
+        ]);
     }
 }
